@@ -1,0 +1,198 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme {
+  --color-snow: #ffffff;
+  --color-mist: #f5f5f5;
+  --color-cloud: #e6e6e6;
+  --color-ink: #161616;
+  --color-night: #121212;
+  --color-night-deep: #0a0a0a;
+  --color-rose: #7a5f5f;
+  --color-rose-mid: #8f6e6e;
+  --color-rose-light: #c2a3a3;
+  --color-rose-soft: #f1eaea;
+
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-aurora: aurora 22s ease-in-out infinite alternate;
+
+  @keyframes aurora {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #161616;
+  --card: #ffffff;
+  --card-foreground: #161616;
+  --popover: #ffffff;
+  --popover-foreground: #161616;
+  --primary: #161616;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #161616;
+  --muted: #f5f5f5;
+  --muted-foreground: #595959;
+  --accent: #f1eaea;
+  --accent-foreground: #161616;
+  --destructive: #b42318;
+  --border: #dadada;
+  --input: #bdbdbd;
+  --ring: #8f6e6e;
+  --radius: 0.25rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings: "lnum", "pnum";
+  }
+
+  ::selection {
+    background: var(--color-rose-light);
+    color: var(--color-night-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rose-mid);
+    outline-offset: 3px;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  select option {
+    color: var(--color-ink);
+    background: #fff;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility text-outline {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+@utility drop-cap {
+  &::first-letter {
+    float: left;
+    margin: 0.32rem 0.75rem 0 0;
+    font-size: 4.6rem;
+    line-height: 0.8;
+    font-weight: 800;
+    color: var(--color-rose);
+  }
+}
+
+@utility range-editorial {
+  appearance: none;
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    height: 2px;
+    background: linear-gradient(to right, var(--color-ink) var(--fill, 50%), var(--color-input) var(--fill, 50%));
+  }
+
+  &::-moz-range-track {
+    height: 2px;
+    background: var(--color-input);
+  }
+
+  &::-moz-range-progress {
+    height: 2px;
+    background: var(--color-ink);
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: calc(-0.575rem + 1px);
+    border-radius: 9999px;
+    background: var(--color-ink);
+    border: 3px solid var(--color-snow);
+    box-shadow: 0 0 0 1px var(--color-ink);
+    transition: transform 0.2s;
+  }
+
+  &::-moz-range-thumb {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 9999px;
+    background: var(--color-ink);
+    border: 3px solid var(--color-snow);
+    box-shadow: 0 0 0 1px var(--color-ink);
+  }
+
+  &:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+  }
+
+  &:focus-visible {
+    outline-offset: 6px;
+  }
+}
